@@ -1,0 +1,198 @@
+body {
+  font-family: 'Georgia', serif;
+  background: url('papel-envelhecido.jpg') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  color: #001F3F;
+}
+
+.tela {
+  display: none;
+  min-height: 100vh;
+  padding: 60px 20px;
+  max-width: 1000px;
+  margin: auto;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tela.active {
+  display: flex;
+}
+
+h1, h2 {
+  color: #001F3F;
+  font-size: 3em;
+  margin-bottom: 25px;
+}
+
+p {
+  font-size: 1.6em;
+  line-height: 1.8em;
+  margin: 20px 0;
+  max-width: 95%;
+}
+
+button {
+  background-color: #001F3F;
+  color: white;
+  border: none;
+  padding: 18px 36px;
+  font-size: 20px;
+  margin: 25px 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #004080;
+}
+
+.foto-bloco {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 50px 0;
+  flex-wrap: wrap;
+}
+
+.foto {
+  width: 280px;
+  height: auto;
+  margin: 10px;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+  border-radius: 8px;
+  transition: transform 0.4s;
+}
+
+.inclinada-esq {
+  transform: rotate(-5deg);
+}
+
+.inclinada-dir {
+  transform: rotate(5deg);
+}
+
+.legenda {
+  max-width: 300px;
+  font-size: 1.2em;
+  margin-left: 20px;
+}
+
+.player {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 100;
+}
+
+#btn-musica {
+  font-size: 26px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ===== PRESENTE INICIAL ===== */
+#telaPresente {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0a0a23;
+  color: white;
+  flex-direction: column;
+  text-align: center;
+}
+
+.presente {
+  position: relative;
+  width: 500px;
+  height: 200px;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+
+.presente:hover {
+  transform: scale(1.05);
+}
+
+.caixa {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #1c1c3c, #101030);
+  border: 4px solid #fff;
+  border-radius: 10px;
+}
+
+.tampa {
+  position: absolute;
+  top: -40px;
+  width: 100%;
+  height: 40px;
+  background: #1a1a36;
+  border-radius: 10px 10px 0 0;
+  border: 4px solid #fff;
+}
+
+.clique-texto {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #ccc;
+  animation: piscar 1.5s infinite;
+}
+
+@keyframes piscar {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+
+/* ===== TELA DE EMBALAGEM DE PRESENTE ===== */
+.tela-presente {
+  background: linear-gradient(135deg, #061639, #122b63);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  color: white;
+}
+
+.conteudo-presente {
+  cursor: pointer;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.conteudo-presente:hover {
+  transform: scale(1.05);
+}
+
+.imagem-presente {
+  width: 220px;
+  height: auto;
+  animation: pulse 2s infinite;
+}
+
+.texto-presente {
+  font-size: 1.5rem;
+  margin-top: 20px;
+  font-family: 'Georgia', serif;
+  animation: piscar 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
