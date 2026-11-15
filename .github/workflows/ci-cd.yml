@@ -1,0 +1,67 @@
+name: CI e deploy do site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  ci:
+    name: Verificar o site
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar o projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Verificar sintaxe do JavaScript
+        run: node --check script.js
+
+      - name: Verificar arquivos do site
+        run: |
+          for arquivo in index.html style.css script.js presente.png \
+            img1.jpeg img2.jpeg img3.jpeg img4.jpeg musica.mp3; do
+            test -s "$arquivo" || { echo "Arquivo ausente ou vazio: $arquivo"; exit 1; }
+          done
+
+      - name: Preparar arquivos para publicação
+        if: github.event_name == 'push'
+        run: |
+          mkdir public
+          cp index.html style.css script.js *.jpeg *.jpg *.png *.mp3 public/
+
+      - name: Guardar arquivos para publicação
+        if: github.event_name == 'push'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    name: Publicar no GitHub Pages
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: ci
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.publicar.outputs.page_url }}
+
+    steps:
+      - name: Publicar
+        id: publicar
+        uses: actions/deploy-pages@v4
